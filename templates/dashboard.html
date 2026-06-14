@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Monitoring Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Machine Monitoring Dashboard</h1>
+
+        <!-- Status Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Machine Status</h3>
+                <p id="status">Loading...</p>
+            </div>
+
+            <div class="card">
+                <h3>Temperature</h3>
+                <p id="temperature">0 °C</p>
+            </div>
+
+            <div class="card">
+                <h3>Current</h3>
+                <p id="current">0 A</p>
+            </div>
+
+            <div class="card">
+                <h3>Power</h3>
+                <p id="power">0 W</p>
+            </div>
+
+            <div class="card">
+                <h3>Production Count</h3>
+                <p id="count">0</p>
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <!-- Controls -->
+        <div class="actions">
+
+           <div class="filter-box">
+
+              <label>From</label>
+            <input
+                type="datetime-local"
+                id="startDate"
+            >
+
+            <label>To</label>
+            <input
+                type="datetime-local"
+                id="endDate"
+            >
+
+            <button onclick="filterData()">
+                Filter
+            </button>
+
+            <button onclick="exportCSV()">
+                Export CSV
+            </button>
+
+            <button onclick="refreshDashboard()">
+                Refresh
+            </button>
+
+            <button onclick="resetData()">
+                Reset Data
+            </button>
+
+            </div>
+
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-box">
+            <canvas id="machineChart"></canvas>
+        </div>
+
+        <!-- History Table -->
+        <div class="table-box">
+
+            <h2>Recent Records</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Temp (°C)</th>
+                        <th>Current (A)</th>
+                        <th>Power (W)</th>
+                        <th>Count</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="historyTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
